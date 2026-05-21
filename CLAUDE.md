@@ -57,13 +57,13 @@ usr/share/sddm/themes/edu-simplicity/
 
 All controls share the same palette — edit `Main.qml` properties to retheme globally:
 
-| Property | Value |
-|---|---|
-| `backgroundColor` | `Qt.rgba(0,0,0,0.4)` |
+| Property               | Value                |
+|------------------------|----------------------|
+| `backgroundColor`      | `Qt.rgba(0,0,0,0.4)` |
 | `hoverBackgroundColor` | `Qt.rgba(0,0,0,0.6)` |
-| Border | `Qt.rgba(1,1,1,0.4)` |
-| Text | `"white"` |
-| Radius | `3` |
+| Border                 | `Qt.rgba(1,1,1,0.4)` |
+| Text                   | `"white"`            |
+| Radius                 | `3`                  |
 
 ## SDDM bindings available in QML
 
