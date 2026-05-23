@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="kiro.jpg" alt="Kiro" width="220" />
+</p>
+
 # edu-sddm-simplicity
 
 A clean, minimal SDDM (Simple Desktop Display Manager) login theme. Part of the `~/EDU/` learning series.
