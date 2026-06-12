@@ -2,7 +2,7 @@
   <img src="kiro.jpg" alt="Kiro" width="220" />
 </p>
 
-# edu-sddm-simplicity
+# kiro-sddm-simplicity
 
 A clean, minimal SDDM (Simple Desktop Display Manager) login theme. Part of the `~/EDU/` learning series.
 
@@ -14,7 +14,7 @@ A clean, minimal SDDM (Simple Desktop Display Manager) login theme. Part of the 
 
 ## Companion variant
 
-- [edu-sddm-simplicity-qt6](https://github.com/erikdubois/edu-sddm-simplicity-qt6) — Qt 6 version of the same theme.
+- [kiro-sddm-simplicity-qt6](https://github.com/kirodubes/kiro-sddm-simplicity-qt6) — Qt 6 version of the same theme.
 
 ## Installation
 
@@ -28,7 +28,7 @@ Server = https://erikdubois.github.io/$repo/$arch
 
 ```bash
 sudo pacman -Syu
-sudo pacman -S edu-sddm-simplicity
+sudo pacman -S kiro-sddm-simplicity
 ```
 
 You'll also need SDDM itself:
@@ -41,8 +41,8 @@ sudo systemctl enable sddm.service
 ### Manual
 
 ```bash
-git clone https://github.com/erikdubois/edu-sddm-simplicity.git
-cd edu-sddm-simplicity
+git clone https://github.com/kirodubes/kiro-sddm-simplicity.git
+cd kiro-sddm-simplicity
 sudo cp -r usr/share/sddm/themes/. /usr/share/sddm/themes/
 ```
 

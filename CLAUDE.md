@@ -25,7 +25,7 @@ sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/edu-simplicity
 Or point directly at the repo while developing:
 
 ```bash
-sddm-greeter-qt6 --test-mode --theme /home/erik/EDU/edu-sddm-simplicity-qt6/usr/share/sddm/themes/edu-simplicity
+sddm-greeter-qt6 --test-mode --theme /home/erik/EDU/kiro-sddm-simplicity-qt6/usr/share/sddm/themes/edu-simplicity
 ```
 
 Note: test mode requires a running X11/Wayland session — does not work from TTY.
@@ -73,7 +73,7 @@ All controls share the same palette — edit `Main.qml` properties to retheme gl
 
 Theme is fully working with both Qt5.15 (`sddm-greeter`, X11) and Qt6 (`sddm-greeter-qt6`, Wayland). Key files: `Main.qml` (root `Item`, `Repeater+screenModel` background), `SceneBackground.qml` (breeze-derived, pure QtQuick). All imports at `2.15`.
 
-Next: consider merging this repo's code back into the original `edu-sddm-simplicity` (non-qt6) repo, since the Qt5/Qt6 distinction is now moot.
+Next: consider merging this repo's code back into the original `kiro-sddm-simplicity` (non-qt6) repo, since the Qt5/Qt6 distinction is now moot.
 
 ## Git helpers
 

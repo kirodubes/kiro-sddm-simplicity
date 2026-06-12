@@ -12,7 +12,7 @@ Item {
 
     // Base font size for all controls — bumped for low-vision readability.
     // Backgrounds use implicitHeight: 30 as a floor, so controls grow to fit.
-    readonly property int fontSize: 16
+    readonly property int fontSize: 13
 
     // Toggle-driven on-screen keyboard (accessibility) — see InputPanel below.
     property bool keyboardVisible: false
