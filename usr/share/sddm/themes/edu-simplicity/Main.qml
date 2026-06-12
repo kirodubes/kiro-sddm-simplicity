@@ -243,4 +243,14 @@ Item {
         y: root.keyboardVisible ? parent.height - height : parent.height
         Behavior on y { NumberAnimation { duration: 200; easing.type: Easing.InOutQuad } }
     }
+
+    // Let the keyboard's own hide key dismiss it too. One-way sync (hide → close)
+    // so the panel still never auto-opens on field focus — toggle-only stays intact.
+    Connections {
+        target: Qt.inputMethod
+        function onVisibleChanged() {
+            if (!Qt.inputMethod.visible)
+                root.keyboardVisible = false
+        }
+    }
 }
