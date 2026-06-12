@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.VirtualKeyboard
+import QtQuick.VirtualKeyboard 2.15
 import SddmComponents 2.0
 import "SimpleControls" as Simple
 
