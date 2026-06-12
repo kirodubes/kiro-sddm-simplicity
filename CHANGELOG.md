@@ -4,13 +4,20 @@
 
 ### What Changed
 
-Accessibility: bumped all login-screen text up for low-vision readability. Every control on the greeter (user picker, password field, Login button, error message, power buttons, session picker, clock) now renders at a larger, consistent font size instead of the small Qt default. Part of the 2026-06-12 accessibility push.
+Two-part accessibility push for the login greeter:
+
+1. **Low-vision readability** — every control on the greeter (user picker, password field, Login button, error message, power buttons, session picker, clock) now renders at a larger, consistent font size instead of the small Qt default.
+2. **On-screen keyboard** — added a Qt VirtualKeyboard `InputPanel` that a mobility-impaired user can raise without a physical keyboard, surfaced via a new **Keyboard** toggle button in the bottom power row. This is the SDDM equivalent of LightDM + Onboard (Onboard is session-only and does nothing at the greeter).
 
 ### Technical Details
 
 - Added a single `readonly property int fontSize: 16` on the root `Item` in `Main.qml` — the one knob to retune all greeter text, matching the theme's existing "edit one root property to retheme globally" pattern.
 - Applied `font.pointSize: root.fontSize` to each control instance in `Main.qml`. The `SimpleControls` (Button/ComboBox) propagate it via their existing `font: control.font` content items, so no edits were needed in `SimpleControls/`.
 - No height edits required: control backgrounds use `implicitHeight: 30` as a floor, and Qt Quick Controls grow `implicitHeight` to `max(background, content + padding)`, so larger text expands the controls automatically. Error rect (`height: loginButton.height`) and clock (`height: session.height`) already track their neighbours.
+- Keyboard: `import QtQuick.VirtualKeyboard` (the unversioned Qt6 module from `qt6-virtualkeyboard` — the live greeter is Qt6 `sddm-git`), a `property bool keyboardVisible`, and an `InputPanel` that slides up from the bottom. Visibility is gated on `keyboardVisible` (driven only by the toggle button) rather than `inputPanel.active`, so the keyboard is **toggle-only** and never auto-pops on field focus. Tab order weaves the new button between `shutdown` and `session`.
+- When the keyboard is raised the login column lifts into the space above it via `anchors.verticalCenterOffset: -(inputPanel.height / 2)` (200ms `Behavior`), so the password field is never hidden behind the keyboard. Driven by the panel's own height, so it scales to any screen resolution — no hardcoded offset.
+- Password field sets `placeholderTextColor: "white"` so the "Enter your password" hint is legible against the dark translucent background (the default Qt placeholder gray was hard to read).
+- Requires `InputMethod=qtvirtualkeyboard` in `sddm.conf` and the `qt6-virtualkeyboard` package on the system/ISO — both wired up in `kiro-iso-next`.
 
 ### Files Modified
 

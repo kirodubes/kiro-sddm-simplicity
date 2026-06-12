@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.VirtualKeyboard
 import SddmComponents 2.0
 import "SimpleControls" as Simple
 
@@ -12,6 +13,9 @@ Item {
     // Base font size for all controls — bumped for low-vision readability.
     // Backgrounds use implicitHeight: 30 as a floor, so controls grow to fit.
     readonly property int fontSize: 16
+
+    // Toggle-driven on-screen keyboard (accessibility) — see InputPanel below.
+    property bool keyboardVisible: false
 
     width: 1920
     height: 1080
@@ -47,6 +51,10 @@ Item {
     Column {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+        // Lift the login fields into the space above the keyboard when it is
+        // raised, so the password field is never hidden behind it.
+        anchors.verticalCenterOffset: root.keyboardVisible ? -(inputPanel.height / 2) : 0
+        Behavior on anchors.verticalCenterOffset { NumberAnimation { duration: 200; easing.type: Easing.InOutQuad } }
         spacing: 10
 
         Simple.ComboBox {
@@ -67,6 +75,7 @@ Item {
             focus: true
             font.pointSize: root.fontSize
             placeholderText: textConstants.promptPassword
+            placeholderTextColor: "white"
             width: 250
             background: Rectangle {
                 implicitWidth: 100
@@ -157,7 +166,15 @@ Item {
             font.pointSize: root.fontSize
             onClicked: sddm.powerOff()
             visible: sddm.canPowerOff
-            KeyNavigation.backtab: restart; KeyNavigation.tab: session
+            KeyNavigation.backtab: restart; KeyNavigation.tab: keyboardToggle
+        }
+
+        Simple.Button {
+            id: keyboardToggle
+            text: "Keyboard"
+            font.pointSize: root.fontSize
+            onClicked: root.keyboardVisible = !root.keyboardVisible
+            KeyNavigation.backtab: shutdown; KeyNavigation.tab: session
         }
     }
 
@@ -175,7 +192,7 @@ Item {
         font.pointSize: root.fontSize
         width: 200
         visible: sessionModel.rowCount() > 1
-        KeyNavigation.backtab: shutdown
+        KeyNavigation.backtab: keyboardToggle
         KeyNavigation.tab: user_entry
     }
 
@@ -211,5 +228,16 @@ Item {
         onTriggered: {
             timelb.text = Qt.formatDateTime(new Date(), "HH:mm")
         }
+    }
+
+    // On-screen keyboard — slides up from the bottom only when the user clicks
+    // the Keyboard button (root.keyboardVisible), never auto-shown on focus.
+    InputPanel {
+        id: inputPanel
+        z: 99
+        anchors.left: parent.left
+        anchors.right: parent.right
+        y: root.keyboardVisible ? parent.height - height : parent.height
+        Behavior on y { NumberAnimation { duration: 200; easing.type: Easing.InOutQuad } }
     }
 }
