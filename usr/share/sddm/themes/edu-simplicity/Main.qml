@@ -125,9 +125,12 @@ Item {
     Row {
         anchors {
             bottom: parent.bottom
-            bottomMargin: 10
+            // Lift the whole power row (incl. the Keyboard toggle) above the
+            // keyboard when it's open, so the toggle stays reachable to close it.
+            bottomMargin: root.keyboardVisible ? inputPanel.height + 10 : 10
             horizontalCenter: parent.horizontalCenter
         }
+        Behavior on anchors.bottomMargin { NumberAnimation { duration: 200; easing.type: Easing.InOutQuad } }
 
         spacing: 5
         
