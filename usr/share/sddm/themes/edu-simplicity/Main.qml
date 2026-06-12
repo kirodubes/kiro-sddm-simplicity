@@ -9,6 +9,10 @@ Item {
     readonly property color backgroundColor: Qt.rgba(0, 0, 0, 0.4)
     readonly property color hoverBackgroundColor: Qt.rgba(0, 0, 0, 0.6)
 
+    // Base font size for all controls — bumped for low-vision readability.
+    // Backgrounds use implicitHeight: 30 as a floor, so controls grow to fit.
+    readonly property int fontSize: 16
+
     width: 1920
     height: 1080
 
@@ -50,6 +54,7 @@ Item {
             model: userModel
             currentIndex: userModel.lastIndex
             textRole: "realName"
+            font.pointSize: root.fontSize
             width: 250
             KeyNavigation.backtab: session
             KeyNavigation.tab: pw_entry
@@ -60,6 +65,7 @@ Item {
             color: "white"
             echoMode: TextInput.Password
             focus: true
+            font.pointSize: root.fontSize
             placeholderText: textConstants.promptPassword
             width: 250
             background: Rectangle {
@@ -77,6 +83,7 @@ Item {
         Simple.Button {
             id: loginButton
             text: textConstants.login
+            font.pointSize: root.fontSize
             width: 250
             onClicked: sddm.login(user_entry.getValue(), pw_entry.text, session.currentIndex)
             KeyNavigation.backtab: pw_entry
@@ -97,6 +104,7 @@ Item {
                 text: textConstants.loginFailed
                 width: 240
                 color: "white"
+                font.pointSize: root.fontSize
                 font.bold: true
                 elide: Qt.locale().textDirection == Qt.RightToLeft ? Text.ElideLeft : Text.ElideRight
                 horizontalAlignment: Qt.AlignHCenter
@@ -117,6 +125,7 @@ Item {
         Simple.Button {
             id: suspend
             text: textConstants.suspend
+            font.pointSize: root.fontSize
             onClicked: sddm.suspend()
             visible: sddm.canSuspend
             KeyNavigation.backtab: loginButton
@@ -126,6 +135,7 @@ Item {
         Simple.Button {
             id: hibernate
             text: textConstants.hibernate
+            font.pointSize: root.fontSize
             onClicked: sddm.hibernate()
             visible: sddm.canHibernate
             KeyNavigation.backtab: suspend
@@ -135,6 +145,7 @@ Item {
         Simple.Button {
             id: restart
             text: textConstants.reboot
+            font.pointSize: root.fontSize
             onClicked: sddm.reboot()
             visible: sddm.canReboot
             KeyNavigation.backtab: suspend; KeyNavigation.tab: shutdown
@@ -143,6 +154,7 @@ Item {
         Simple.Button {
             id: shutdown
             text: textConstants.shutdown
+            font.pointSize: root.fontSize
             onClicked: sddm.powerOff()
             visible: sddm.canPowerOff
             KeyNavigation.backtab: restart; KeyNavigation.tab: session
@@ -160,6 +172,7 @@ Item {
         currentIndex: sessionModel.lastIndex
         model: sessionModel
         textRole: "name"
+        font.pointSize: root.fontSize
         width: 200
         visible: sessionModel.rowCount() > 1
         KeyNavigation.backtab: shutdown
@@ -185,6 +198,7 @@ Item {
             anchors.centerIn: parent
             text: Qt.formatDateTime(new Date(), "HH:mm")
             color: "white"
+            font.pointSize: root.fontSize
             horizontalAlignment: Text.AlignHCenter
         }
     }

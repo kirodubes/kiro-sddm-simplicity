@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 2026.06.12
+
+### What Changed
+
+Accessibility: bumped all login-screen text up for low-vision readability. Every control on the greeter (user picker, password field, Login button, error message, power buttons, session picker, clock) now renders at a larger, consistent font size instead of the small Qt default. Part of the 2026-06-12 accessibility push.
+
+### Technical Details
+
+- Added a single `readonly property int fontSize: 16` on the root `Item` in `Main.qml` — the one knob to retune all greeter text, matching the theme's existing "edit one root property to retheme globally" pattern.
+- Applied `font.pointSize: root.fontSize` to each control instance in `Main.qml`. The `SimpleControls` (Button/ComboBox) propagate it via their existing `font: control.font` content items, so no edits were needed in `SimpleControls/`.
+- No height edits required: control backgrounds use `implicitHeight: 30` as a floor, and Qt Quick Controls grow `implicitHeight` to `max(background, content + padding)`, so larger text expands the controls automatically. Error rect (`height: loginButton.height`) and clock (`height: session.height`) already track their neighbours.
+
+### Files Modified
+
+- `usr/share/sddm/themes/edu-simplicity/Main.qml`
+
 ## 2026.05.12
 
 ### What Changed
