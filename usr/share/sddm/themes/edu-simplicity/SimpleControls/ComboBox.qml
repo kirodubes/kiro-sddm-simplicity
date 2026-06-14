@@ -11,7 +11,7 @@ ComboBox {
         contentItem: Text {
             text: itemDelegate.text
             color: "white"
-            font: itemDelegate.font
+            font: control.font
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
         }
