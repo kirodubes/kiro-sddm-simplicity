@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2026.06.14
+
+### What Changed
+
+Fixed the session-picker dropdown font: the open list rendered its items at the small Qt default instead of the theme's `fontSize`, so the size set on the ComboBox was "forgotten" once the dropdown opened.
+
+### Technical Details
+
+- In `SimpleControls/ComboBox.qml` the delegate's `contentItem` Text bound `font: itemDelegate.font` (the ItemDelegate's own default font) rather than the control's font. The closed combo box used `control.font` and looked right; the dropdown items did not. Changed the delegate to `font: control.font` so the open list inherits the same `font.pointSize: root.fontSize` as everything else.
+
+### Files Modified
+
+- `usr/share/sddm/themes/edu-simplicity/SimpleControls/ComboBox.qml`
+
 ## 2026.06.12
 
 ### What Changed
