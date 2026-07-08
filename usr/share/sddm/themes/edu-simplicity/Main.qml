@@ -193,7 +193,7 @@ Item {
         model: sessionModel
         textRole: "name"
         font.pointSize: root.fontSize
-        width: 200
+        width: 300
         visible: sessionModel.rowCount() > 1
         KeyNavigation.backtab: keyboardToggle
         KeyNavigation.tab: user_entry
