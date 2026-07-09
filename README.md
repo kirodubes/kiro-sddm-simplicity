@@ -52,7 +52,7 @@ Edit `/etc/sddm.conf` (or drop a file under `/etc/sddm.conf.d/`):
 
 ```ini
 [Theme]
-Current=simplicity
+Current=edu-simplicity
 ```
 
 Then restart SDDM (or reboot) to see the new login screen.

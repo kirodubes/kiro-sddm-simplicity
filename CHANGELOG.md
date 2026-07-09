@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 2026.07.09
+
+### Doc coherence: fix broken activation + strip qt6-sibling copy/paste
+
+**What Changed**
+- **README activation was broken:** `Current=simplicity` pointed at a theme id
+  that doesn't exist — the shipped theme dir / `Theme-Id` is `edu-simplicity`, and
+  SDDM's `Current=` keys on that. Corrected to `Current=edu-simplicity`.
+- **CLAUDE.md carried stale copy/paste from the `kiro-sddm-simplicity-qt6`
+  sibling:** the "targeting Qt6 / requires Qt6 SDDM" line (contradicted the
+  "works with both Qt5.15 and Qt6" state + the shipped Qt5-forcing conf), a dev
+  test path pointing at the qt6 repo (also a home-path leak), and a "merge this
+  repo back into the original kiro-sddm-simplicity" note (this repo *is* that
+  base). All corrected to describe this base repo.
+- **Scrubbed a hardcoded home-path + wrong-repo name** from an older CHANGELOG
+  deploy note → the correct `sudo cp -r usr/ /` from the repo root.
+
+**Files Modified**
+- `README.md`, `CLAUDE.md`, `CHANGELOG.md`
+
 ## 2026.06.14
 
 ### What Changed
@@ -65,7 +85,7 @@ Confirmed the theme works on real hardware under X11 SDDM (`sddm-greeter`, Qt5.1
 
 ### Technical Details
 
-- Deployed with `sudo cp -r /home/erik/EDU/edu-sddm-simplicity-qt6/usr/ /` — full path required, running from wrong dir was the earlier failure
+- Deployed with `sudo cp -r usr/ /` from the repo root — running from the wrong dir was the earlier failure
 - Fast-forward merge from `breeze-background` to master; origin/master already up to date
 - Theme now confirmed working: X11 Qt5.15 greeter on dev machine, both test-mode greeters verified
 

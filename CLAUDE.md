@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-An SDDM login screen theme named **edu-simplicity**, forked/derived from the upstream `arcolinux-simplicity` theme (original author: Gabriel Ibáñez). Written in QML targeting **Qt6** (unversioned imports — requires Qt6 SDDM).
+An SDDM login screen theme named **edu-simplicity**, forked/derived from the upstream `arcolinux-simplicity` theme (original author: Gabriel Ibáñez). Written in QML with versioned imports (`2.15`), working with **both** the Qt5 (`sddm-greeter`, X11) and Qt6 (`sddm-greeter-qt6`) SDDM greeters. This is the base repo; `kiro-sddm-simplicity-qt6` is the Qt6-only sibling.
 
 ## Install path
 
@@ -22,10 +22,10 @@ Theme lands at `/usr/share/sddm/themes/edu-simplicity/`.
 sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/edu-simplicity
 ```
 
-Or point directly at the repo while developing:
+Or point directly at this repo's copy while developing (run from the repo root):
 
 ```bash
-sddm-greeter-qt6 --test-mode --theme /home/erik/EDU/kiro-sddm-simplicity-qt6/usr/share/sddm/themes/edu-simplicity
+sddm-greeter-qt6 --test-mode --theme "$PWD/usr/share/sddm/themes/edu-simplicity"
 ```
 
 Note: test mode requires a running X11/Wayland session — does not work from TTY.
@@ -73,7 +73,7 @@ All controls share the same palette — edit `Main.qml` properties to retheme gl
 
 Theme is fully working with both Qt5.15 (`sddm-greeter`, X11) and Qt6 (`sddm-greeter-qt6`, Wayland). Key files: `Main.qml` (root `Item`, `Repeater+screenModel` background), `SceneBackground.qml` (breeze-derived, pure QtQuick). All imports at `2.15`.
 
-Next: consider merging this repo's code back into the original `kiro-sddm-simplicity` (non-qt6) repo, since the Qt5/Qt6 distinction is now moot.
+Next: since the Qt5/Qt6 distinction is now moot (this base theme works with both greeters), consider folding the `kiro-sddm-simplicity-qt6` sibling back into this repo and retiring it.
 
 ## Git helpers
 
