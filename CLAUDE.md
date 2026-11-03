@@ -40,6 +40,7 @@ usr/share/sddm/themes/edu-simplicity/
 ├── SimpleControls/
 │   ├── Button.qml        # Styled Button — white text, semi-transparent dark bg
 │   └── ComboBox.qml      # Styled ComboBox — includes getValue() helper
+├── translations/*.qm    # compiled from repo-root translations/*.ts by update-translations.sh
 ├── images/
 │   └── background.jpg    # Background image (referenced by theme.conf)
 └── faces/

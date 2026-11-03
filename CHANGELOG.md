@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## 2026.11.03 — Login screen fully translated in 13 languages
+
+### What Changed
+- Every word on the login screen is now translated into the 13 Kiro languages (nl, de, es, fr, ru, pt_BR, hu,
+  it, tr, zh_CN, ja, pl, ro): password prompt, Login, Login failed, Suspend, Hibernate, Reboot, Shutdown and the
+  on-screen Keyboard button. Done the same way as the KiroTux theme (kirotux-sddm-simplicity), same day.
+- The theme no longer borrows SDDM's own words: SDDM's translation files miss the password prompt, Suspend and
+  Hibernate in nl, es, pt_BR, hu, it and tr, so those stayed English.
+- A translated screen also needs the kiro-system-files fix of the same day, which stops forcing `LANG=en_US` on
+  every system service, SDDM included.
+
+### Technical Details
+- `Main.qml`: the 7 `textConstants.*` became `qsTr("…")`, plus `qsTr("Keyboard")`; the unused `TextConstants`
+  element is gone. Context `Main`, so the KiroTux `.ts` files apply unchanged.
+- `metadata.desktop` already declared `TranslationsDirectory=translations`; that dir now holds one `.qm` per
+  language, named like SDDM's (`nl.qm`, `pt_BR.qm`, `zh_CN.qm`).
+- Sources are `translations/<lang>.ts` at the repo root, outside `usr/`, so the PKGBUILD does not package them.
+  New `update-translations.sh` runs lupdate over the theme's QML and lrelease into the theme dir, and warns about
+  unfinished strings (none).
+
+### Files Modified
+- `usr/share/sddm/themes/edu-simplicity/Main.qml`
+- `usr/share/sddm/themes/edu-simplicity/translations/*.qm` (13, new)
+- `translations/*.ts` (13, new)
+- `update-translations.sh` (new)
+- `CLAUDE.md`
+
 ## 2026.07.09
 
 ### Doc coherence: fix broken activation + strip qt6-sibling copy/paste
