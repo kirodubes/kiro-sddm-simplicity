@@ -29,7 +29,8 @@ Item {
             x: geometry.x; y: geometry.y
             width: geometry.width; height: geometry.height
             sceneBackgroundType: "image"
-            sceneBackgroundImage: Qt.resolvedUrl("images/background.jpg")
+            // theme.conf.user (written by Ohmychadwm Tweak Tool) may point background at /usr/share/backgrounds
+            sceneBackgroundImage: Qt.resolvedUrl(config.background || "images/background.jpg")
         }
     }
 

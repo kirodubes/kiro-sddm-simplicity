@@ -35,7 +35,8 @@ Note: test mode requires a running X11/Wayland session — does not work from TT
 ```
 usr/share/sddm/themes/edu-simplicity/
 ├── Main.qml              # Root component — layout, SDDM signal handlers, timer
-├── theme.conf            # Single key: background=images/background.jpg
+├── theme.conf            # Single key: background=images/background.jpg (Main.qml reads config.background;
+│                         #   theme.conf.user, written by Ohmychadwm Tweak Tool, may override it)
 ├── metadata.desktop      # Theme metadata (name, version, entry point)
 ├── SimpleControls/
 │   ├── Button.qml        # Styled Button — white text, semi-transparent dark bg

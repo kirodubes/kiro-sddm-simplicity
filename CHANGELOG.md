@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 2026.11.20 — Login wallpaper can be changed without touching the package
+
+### What Changed
+- The login screen now uses the `background` from its settings instead of a fixed picture. Ohmychadwm Tweak Tool's
+  new Themes page uses this to put the chosen look's wallpaper on the login screen. Nothing changes for anyone else:
+  `theme.conf` still points at the same `images/background.jpg`.
+
+### Technical Details
+- `Main.qml`: `Qt.resolvedUrl(config.background || "images/background.jpg")`. A relative value resolves next to
+  `Main.qml` as before; an absolute path works too. SDDM layers `theme.conf.user` over `theme.conf`. No package owns
+  that file, so a pacman upgrade never overwrites the user's choice.
+- The Qt6-only sibling kiro-sddm-simplicity-qt6 is unchanged (not on the Kiro ISO).
+
+### Files Modified
+- `usr/share/sddm/themes/edu-simplicity/Main.qml`
+- `CLAUDE.md`
+
 ## 2026.11.03 — Login screen fully translated in 13 languages
 
 ### What Changed
